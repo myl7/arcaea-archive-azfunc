@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Azure.Cosmos.Table;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace arcaea_archive_azfunc
@@ -57,7 +58,8 @@ namespace arcaea_archive_azfunc
                         return song;
                     });
 
-                var res = new JObject(new JProperty("user", user), new JProperty("songs", songs)).ToString();
+                var res =
+                    new JObject(new JProperty("user", user), new JProperty("songs", songs)).ToString(Formatting.None);
                 using var output = new MemoryStream();
                 using var gzip = new GZipStream(output, CompressionMode.Compress);
                 using var input = new MemoryStream(Encoding.UTF8.GetBytes(res));
