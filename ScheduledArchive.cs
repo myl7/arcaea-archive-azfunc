@@ -53,11 +53,6 @@ namespace arcaea_archive_azfunc
                     {
                         var song = (JObject) s;
                         var titleKey = (string) s["song_id"];
-                        if (titleKey == "worldvanquisher")
-                        {
-                            titleKey = "worldvanquier";
-                        }
-
                         song.Add("title", titles[titleKey]);
                         return song;
                     });
