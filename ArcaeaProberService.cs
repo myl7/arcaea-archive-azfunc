@@ -13,7 +13,7 @@ namespace arcaea_archive_azfunc
     public static class ArcaeaProberService
     {
         private const string ArcaeaProberUrl = "wss://arc.estertion.win:616";
-        private const string Query = "984569312 7 11";
+        private const string Query = "984569312 7 12";
 
         public static async Task<List<string>> Get()
         {
