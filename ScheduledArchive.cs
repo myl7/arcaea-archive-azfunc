@@ -38,7 +38,7 @@ namespace arcaea_archive_azfunc
 
                 var userMsg = results[0];
                 results.RemoveAt(0);
-                var user = JObject.Parse(userMsg)["data"];
+                var userInfo = JObject.Parse(userMsg)["data"];
 
                 var songs = results.Select(m => (JArray) JObject.Parse(m)["data"])
                     .Aggregate(new JArray(), (array, tokens) =>
@@ -58,8 +58,10 @@ namespace arcaea_archive_azfunc
                         return song;
                     });
 
-                var res =
-                    new JObject(new JProperty("user", user), new JProperty("songs", songs)).ToString(Formatting.None);
+                var res = new JObject(
+                    new JProperty("userInfo", userInfo),
+                    new JProperty("songs", songs)
+                ).ToString(Formatting.None);
                 using var output = new MemoryStream();
                 using var gzip = new GZipStream(output, CompressionMode.Compress);
                 using var input = new MemoryStream(Encoding.UTF8.GetBytes(res));
